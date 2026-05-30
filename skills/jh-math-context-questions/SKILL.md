@@ -194,7 +194,7 @@ print(f"[OK] 驗算通過 {len(exam['questions'])} 題")
 **生圖呼叫**（Step 5.7 會自動執行）：
 
 ```bash
-python C:/Users/mathr/.claude/skills/draw/draw.py \
+python ~/.claude/skills/draw/draw.py \
   "<prompt>" --size <size> --quality <quality> \
   --name <id> --outdir /home/claude/illustrations/
 ```
@@ -307,7 +307,7 @@ fi
 
 ```bash
 mkdir -p /home/claude/illustrations
-DRAW="python C:/Users/mathr/.claude/skills/draw/draw.py"   # Windows 路徑；macOS/Linux 改為 ~/.claude/skills/draw/draw.py
+DRAW="python ~/.claude/skills/draw/draw.py"   # draw 生圖技能路徑；請改成你環境的對應路徑
 
 python3 - <<'PYEOF'
 import json, subprocess, sys
@@ -328,7 +328,7 @@ print(f"→ 共 {len(jobs)} 張情境圖要生")
 for job in jobs:
     cmd = [
         sys.executable,
-        "C:/Users/mathr/.claude/skills/draw/draw.py",
+        "~/.claude/skills/draw/draw.py",
         job['prompt'],
         '--size', job.get('size', '1024x1024'),
         '--quality', job.get('quality', 'low'),

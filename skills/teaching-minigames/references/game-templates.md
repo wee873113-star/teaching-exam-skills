@@ -1,16 +1,16 @@
-# Game HTML Templates Reference
+# 國小數學互動小遊戲 HTML 模板參考
 
-各類型遊戲的完整 HTML 模板，Claude 製作小遊戲時應參考這些結構。
+本文件包含各類型小遊戲的完整 HTML 模板。製作小遊戲時應複製並填入對應的題目與答案。
 
 ---
 
-## 通用 CSS 樣式（所有遊戲共用）
+## 🎨 通用 CSS 樣式（國小版，字體加大、色彩溫馨）
 
 ```css
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: 'Segoe UI', '微軟正黑體', sans-serif;
-  background: #f0f4ff;
+  font-family: 'Segoe UI', '微軟正黑體', 'Apple LiGothic', sans-serif;
+  background: #e7f5ff; /* 溫馨的軟萌粉藍色背景 */
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -19,43 +19,43 @@ body {
 }
 .game-card {
   background: white;
-  border-radius: 16px;
-  padding: 28px 24px;
-  max-width: 480px;
+  border-radius: 20px; /* 更圓潤的卡片 */
+  padding: 32px 24px;
+  max-width: 500px;
   width: 100%;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  box-shadow: 0 8px 32px rgba(76, 110, 245, 0.12); /* 柔和的藍色陰影 */
 }
-h1 { font-size: 1.2rem; color: #3b5bdb; margin-bottom: 4px; }
-.subtitle { font-size: 0.85rem; color: #888; margin-bottom: 20px; }
-.question { font-size: 1.05rem; color: #222; margin-bottom: 18px; font-weight: 600; line-height: 1.5; }
-.options { display: flex; flex-direction: column; gap: 10px; }
+h1 { font-size: 1.4rem; color: #3b5bdb; margin-bottom: 6px; text-align: center; }
+.subtitle { font-size: 0.95rem; color: #868e96; margin-bottom: 24px; text-align: center; font-weight: bold; }
+.progress { font-size: 0.95rem; color: #495057; margin-bottom: 16px; font-weight: bold; }
+.question { font-size: 1.25rem; color: #212529; margin-bottom: 20px; font-weight: 800; line-height: 1.6; }
+.options { display: flex; flex-direction: column; gap: 12px; }
 .btn {
-  background: #f0f4ff; border: 2px solid #c5d0e8;
-  border-radius: 10px; padding: 13px 16px;
-  font-size: 1rem; cursor: pointer; text-align: left;
-  transition: all 0.18s; color: #333;
+  background: #f8f9fa; border: 3px solid #dee2e6; /* 加粗按鈕邊框 */
+  border-radius: 12px; padding: 16px 20px;
+  font-size: 1.1rem; cursor: pointer; text-align: left;
+  transition: all 0.2s; color: #343a40; font-weight: bold;
 }
-.btn:hover { background: #dde4ff; border-color: #4c6ef5; }
-.btn.correct { background: #d3f9d8; border-color: #51cf66; color: #1a7a2e; }
-.btn.wrong { background: #ffe3e3; border-color: #ff6b6b; color: #c92a2a; }
+.btn:hover { background: #edf2ff; border-color: #4c6ef5; }
+.btn.correct { background: #ebfbee; border-color: #40c057; color: #2b8a3e; }
+.btn.wrong { background: #fff5f5; border-color: #fa5252; color: #c92a2a; }
 .feedback {
-  margin-top: 16px; padding: 12px 16px;
-  border-radius: 10px; font-size: 0.95rem;
-  display: none;
+  margin-top: 18px; padding: 14px 18px;
+  border-radius: 12px; font-size: 1.05rem; font-weight: bold;
+  display: none; line-height: 1.5;
 }
 .feedback.show { display: block; }
-.feedback.ok { background: #d3f9d8; color: #1a7a2e; }
-.feedback.fail { background: #ffe3e3; color: #c92a2a; }
-.progress { font-size: 0.85rem; color: #888; margin-bottom: 14px; }
-.score-display { font-size: 1.1rem; font-weight: 700; color: #3b5bdb; margin: 14px 0; }
+.feedback.ok { background: #ebfbee; color: #2b8a3e; border: 2px solid #40c057; }
+.feedback.fail { background: #fff5f5; color: #c92a2a; border: 2px solid #fa5252; }
+.score-display { font-size: 1.3rem; font-weight: 800; color: #3b5bdb; margin: 20px 0; text-align: center; }
 .replay-btn {
   background: #3b5bdb; color: white; border: none;
-  border-radius: 10px; padding: 13px 20px;
-  font-size: 1rem; cursor: pointer; width: 100%; margin-top: 16px;
+  border-radius: 12px; padding: 16px 24px;
+  font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 20px; font-weight: bold;
 }
 .replay-btn:hover { background: #2f4ac0; }
-.qr-section { text-align: center; margin-top: 24px; border-top: 1px solid #eee; padding-top: 18px; }
-.qr-section p { font-size: 0.8rem; color: #aaa; margin-top: 6px; }
+.qr-section { text-align: center; margin-top: 28px; border-top: 2px dashed #e9ecef; padding-top: 20px; }
+.qr-section p { font-size: 0.85rem; color: #868e96; margin-top: 8px; font-weight: bold; }
 ```
 
 ---
@@ -68,16 +68,16 @@ h1 { font-size: 1.2rem; color: #3b5bdb; margin-bottom: 4px; }
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>重點N：[標題] - 選擇題</title>
+  <title>重點1：分數的認識 - 選擇題</title>
   <style>
     /* 貼上通用 CSS */
   </style>
 </head>
 <body>
 <div class="game-card">
-  <h1>🎯 重點N：[標題]</h1>
+  <h1>🎯 重點1：分數的認識</h1>
   <p class="subtitle">選擇題 · 請選出正確答案</p>
-  <div class="progress" id="progress">第 1 / 4 題</div>
+  <div class="progress" id="progress">⭐ 第 1 / 3 題</div>
   <div class="question" id="question"></div>
   <div class="options" id="options"></div>
   <div class="feedback" id="feedback"></div>
@@ -87,18 +87,23 @@ h1 { font-size: 1.2rem; color: #3b5bdb; margin-bottom: 4px; }
   </div>
   <div class="qr-section">
     <img id="qr" width="120" height="120" alt="QR Code">
-    <p>掃描 QR Code 開啟此遊戲</p>
+    <p>掃描 QR Code 挑戰這關遊戲</p>
   </div>
 </div>
 <script>
 const questions = [
   {
-    q: "問題一文字？",
-    options: ["A. 選項", "B. 選項", "C. 選項", "D. 選項"],
-    answer: 0,  // 正確答案的 index
-    explanation: "解釋為什麼正確"
+    q: "把一個披薩平分切成 8 塊，小明拿了其中的 3 塊，請問是多少個披薩？",
+    options: ["A. 8分之3 個", "B. 3分之8 個", "C. 3 個", "D. 8 個"],
+    answer: 0,
+    explanation: "平分切成 8 塊，每一塊是 8分之1 個，3 塊就是 8分之3 個喔！"
   },
-  // ... 更多題目
+  {
+    q: "下列哪一個分數和「2分之1」一樣大？",
+    options: ["A. 3分之1", "B. 4分之2", "C. 6分之2", "D. 5分之1"],
+    answer: 1,
+    explanation: "4分之2 約分之後（分子分母同除以 2）就是 2分之1 喔！"
+  }
 ];
 
 let current = 0, score = 0;
@@ -111,7 +116,7 @@ function startGame() {
 
 function showQuestion() {
   const q = questions[current];
-  document.getElementById('progress').textContent = `第 ${current+1} / ${questions.length} 題`;
+  document.getElementById('progress').textContent = `⭐ 第 ${current+1} / ${questions.length} 題`;
   document.getElementById('question').textContent = q.q;
   const opts = document.getElementById('options');
   opts.innerHTML = '';
@@ -132,13 +137,13 @@ function answer(i, btn) {
   const fb = document.getElementById('feedback');
   if (i === q.answer) {
     btn.classList.add('correct');
-    fb.textContent = `✅ 答對了！${q.explanation}`;
+    fb.textContent = `🎉 太棒了！答對了！✨ ${q.explanation}`;
     fb.className = 'feedback show ok';
     score++;
   } else {
     btn.classList.add('wrong');
     document.querySelectorAll('.btn')[q.answer].classList.add('correct');
-    fb.textContent = `❌ 答錯了。正確答案：${q.options[q.answer]}。${q.explanation}`;
+    fb.textContent = `💪 差一點點，加油！正確答案是：${q.options[q.answer]}。${q.explanation}`;
     fb.className = 'feedback show fail';
   }
   current++;
@@ -146,11 +151,11 @@ function answer(i, btn) {
     if (current < questions.length) showQuestion();
     else {
       document.getElementById('result').style.display = 'block';
-      document.getElementById('score').textContent = `🏆 得分：${score} / ${questions.length}`;
+      document.getElementById('score').textContent = `🏆 挑戰成功！你的得分是：${score} / ${questions.length}`;
       document.getElementById('options').innerHTML = '';
-      document.getElementById('question').textContent = '遊戲結束！';
+      document.getElementById('question').textContent = '遊戲結束囉！';
     }
-  }, 1800);
+  }, 2200);
 }
 
 document.getElementById('qr').src =
@@ -164,157 +169,15 @@ startGame();
 
 ---
 
-## 模板 B：填充題 (Fill-in-Blank)
+## 模板 B：是非題 (True/False)
 
-```javascript
-// questions 格式
-const questions = [
-  {
-    template: "光合作用發生在植物的___中。",
-    blank: "___",
-    answer: "葉綠體",
-    hint: "提示：綠色的細胞器",
-    explanation: "葉綠體含有葉綠素，是光合作用的場所。"
-  },
-];
-
-// 遊戲邏輯：顯示含空白的句子，使用者輸入答案後比對
-// 比對時忽略空格，支援部分關鍵詞（可用 includes）
-function checkFill(input, answer) {
-  return input.trim() === answer.trim() ||
-         answer.includes(input.trim());
-}
-```
-
-填充題 HTML 核心元素：
 ```html
-<div class="question" id="sentence"></div>
-<input type="text" id="fill-input" placeholder="請輸入答案..."
-  style="width:100%;padding:12px;font-size:1rem;border:2px solid #c5d0e8;border-radius:10px;margin:12px 0">
-<button class="btn" onclick="submitFill()" style="width:100%;text-align:center">確認答案</button>
-```
-
----
-
-## 模板 C：配對題 (Matching Pairs)
-
-```javascript
-// pairs 格式
-const pairs = [
-  { left: "光合作用", right: "製造葡萄糖" },
-  { left: "細胞呼吸", right: "釋放能量" },
-  { left: "蒸散作用", right: "水分散失" },
-  { left: "滲透作用", right: "水分移動" },
-];
-
-// 邏輯：
-// 1. 將 left 和 right 分兩欄顯示，順序隨機打亂
-// 2. 點選左邊一個，再點選右邊一個，若配對正確則高亮
-// 3. 全部配對完成後顯示得分
-```
-
-配對題 HTML 核心：
-```html
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="match-grid">
-  <div id="left-col"></div>
-  <div id="right-col"></div>
-</div>
-```
-
----
-
-## 模板 D：是非題 (True/False)
-
-```javascript
+<!-- 核心是非題 JS 結構 -->
+<script>
 const statements = [
-  { text: "植物只在白天進行光合作用。", answer: true, explanation: "正確，光合作用需要光能。" },
-  { text: "細胞呼吸只發生在動物細胞中。", answer: false, explanation: "錯誤，植物也進行細胞呼吸。" },
+  { text: "正方形也是長方形的一種。", answer: true, explanation: "對的！正方形有四個直角，符合長方形的特徵，而且它的四條邊都一樣長喔！" },
+  { text: "分數的分子越大，分數的值就一定越大。", answer: false, explanation: "不對喔！還要看分母的大小。例如 2分之1 比 10分之1 大，但 1 的分子比 2 小。" }
 ];
-```
-
-是非題 HTML 按鈕：
-```html
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
-  <button class="btn" onclick="answerTF(true)" style="text-align:center;font-size:1.2rem">⭕ 正確</button>
-  <button class="btn" onclick="answerTF(false)" style="text-align:center;font-size:1.2rem">❌ 錯誤</button>
-</div>
-```
-
----
-
-## 模板 E：排序題 (Ordering)
-
-```javascript
-const items = ["第一步驟", "第二步驟", "第三步驟", "第四步驟"];
-// 顯示為可拖曳的清單（使用 HTML5 drag and drop API）
-// 或使用點選「上移/下移」的方式（更適合手機）
-```
-
----
-
-## 模板 F：記憶翻牌 (Memory Cards)
-
-```javascript
-const cardPairs = [
-  { term: "光合作用", def: "植物利用光能製造有機物" },
-  { term: "葉綠素", def: "吸收光能的色素" },
-  { term: "葡萄糖", def: "光合作用的產物" },
-];
-// 將每對製作成兩張牌（正面 = 術語，背面 = 定義）
-// 玩家翻開兩張，若配對則保留，否則翻回
-```
-
----
-
-## 索引頁 (index.html) 模板
-
-```html
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[課程名稱] - 重點小遊戲</title>
-  <style>
-    body { font-family: '微軟正黑體', sans-serif; background: #f0f4ff; padding: 20px; }
-    h1 { color: #3b5bdb; text-align: center; margin-bottom: 8px; }
-    .subtitle { text-align:center; color:#888; margin-bottom:24px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; max-width: 900px; margin: 0 auto; }
-    .card { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); }
-    .card h3 { color: #3b5bdb; margin-bottom: 6px; font-size: 1rem; }
-    .tag { display:inline-block; background:#edf2ff; color:#4c6ef5; font-size:0.78rem; padding:3px 8px; border-radius:20px; margin-bottom:10px; }
-    .play-btn { display:block; background:#3b5bdb; color:white; text-decoration:none; padding:10px; border-radius:8px; text-align:center; margin-bottom:12px; font-size:0.95rem; }
-    .play-btn:hover { background:#2f4ac0; }
-    .qr-wrap { text-align:center; }
-    .qr-wrap img { width:100px; height:100px; }
-    .qr-wrap p { font-size:0.75rem; color:#aaa; margin-top:4px; }
-  </style>
-</head>
-<body>
-  <h1>📚 [課程名稱]</h1>
-  <p class="subtitle">共 N 個重點小遊戲 · 掃描 QR Code 或點擊連結開始</p>
-  <div class="grid" id="games-grid"></div>
-  <script>
-  const games = [
-    { title: "重點1：[標題]", type: "選擇題", file: "game-01-xxx.html" },
-    { title: "重點2：[標題]", type: "填充題", file: "game-02-xxx.html" },
-    // ...
-  ];
-  const grid = document.getElementById('games-grid');
-  games.forEach((g, i) => {
-    const url = g.file;
-    grid.innerHTML += `
-      <div class="card">
-        <h3>${g.title}</h3>
-        <span class="tag">${g.type}</span>
-        <a class="play-btn" href="${url}">▶ 開始遊戲</a>
-        <div class="qr-wrap">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(window.location.origin + window.location.pathname.replace('index.html','') + url)}" alt="QR">
-          <p>掃描開啟</p>
-        </div>
-      </div>`;
-  });
-  </script>
-</body>
-</html>
+// 其餘邏輯比照選擇題，按鈕改為「⭕ 正確」與「❌ 錯誤」
+</script>
 ```

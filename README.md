@@ -12,9 +12,11 @@
 | 技能 | 用途 | 額外檔案 |
 |------|------|----------|
 | [`es-science-exam`](skills/es-science-exam/SKILL.md) | 國小自然科學段考出題與審題專家。設計三至六年級自然科（及一至二年級生活課程）試題、審題、建立雙向細目表、分析 Bloom 認知層次分佈。對齊 108 課綱四大主題（物質科學、生命科學、地球與宇宙科學、環境與永續發展）。 | — |
+| [`es-chinese-exam`](skills/es-chinese-exam/SKILL.md) | 國小國語文素養導向命題與審題專家。設計及審核高品質、具鑑別度且情境化的國小（一至六年級）國語文段考試題，建立雙向細目表、分析認知層次。排版格式遵循橫向雙欄且由右至左（RTL）的欄流向，大題固定分為一至八大題，滿分100分。 | — |
 | [`es-science-context-questions`](skills/es-science-context-questions/SKILL.md) | 國小自然科學「生活情境非選擇題/探究與實作題」命題。結合貼近小學生生活的日常情境與科學現象（影子、溫度、溶解、電路、力學等），產出理解與應用/分析層次的兩小題式探究題（含詳解與驗算）。 | — |
 | [`es-science-geometry`](skills/es-science-geometry/SKILL.md) | 國小科學幾何與圖表 SVG 產生器。繪製實驗裝置、力學示意圖、坐標圖表、圓與扇形等幾何圖案，可被出題技能呼叫配圖。 | `scripts/`、`references/` |
 | [`es-science-minigames`](skills/es-science-minigames/SKILL.md) | 把國小自然科學教材重點轉成形成性評量互動小遊戲（選擇、是非、配對、排序等），發佈為可分享的 HTML 與 QR Code。 | `references/` |
+
 
 ---
 
